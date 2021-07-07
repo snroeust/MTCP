@@ -35,16 +35,16 @@ if __name__ == '__main__':
 	args = parser.parse_args()
 	
 	if os.geteuid() != 0:
-		print "You have to be root to load a new scheduler."
+		print("You have to be root to load a new scheduler.")
 		exit()
 	if not os.path.isfile(args.file):
-		print "File ", args.file, " not found."
+		print("File " + str(args.file) + " not found.")
 		exit()
 	if not loadScheduler(args.file):
-		print "Loading the scheduler in file ", args.file, " failed. Execute dmesg to check output."
+		print("Loading the scheduler in file " + str(args.file) + " failed. Execute dmesg to check output.")
 		exit()
 	schedulerName = getSchedulerName(args.file)
 	if not setDefaultScheduler(schedulerName):
-		print "Setting the scheduler as default failed. Execute dmesg to check output."
+		print("Setting the scheduler as default failed. Execute dmesg to check output.")
 		exit()
-	print "Scheduler", schedulerName, "loaded and set as default."
+	print("Scheduler " + str(schedulerName) + " loaded and set as default.")
